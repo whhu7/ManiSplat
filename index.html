@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="ManiSplat">
+  <meta name="keywords" content="3DGS,  Segmentation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ManiSplat</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "$",  right: "$",  display: false},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/compare.css">
+  <link rel="icon" href="./static/images/logo.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.3/dist/js/bulma-slider.min.js"></script>
+  <!-- <script src="./static/js/index.js"></script> -->
+  <!-- <script src="./static/js/compare.js"></script> -->
+</head>
+
+<body>
+
+ 
+  <!-- 标题、作者、链接 -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-widescreen">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title"><span
+                style="background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">ManiSplat</span>:
+                Manipulation Trajectory Synthesis from Monocular Video via
+                Decoupled 3D Gaussian Splatting</h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                Wenhao Hu<sup>1,2</sup>,</span>
+              <span class="author-block">
+                Haonan Zhou<sup>1</sup>,
+              </span>
+              <span class="author-block">
+                Liu Liu<sup>2</sup>,
+              </span>
+              <span class="author-block">
+                Yun Du<sup>1</sup>,
+              </span>
+              <span class="author-block">
+                Xingjie Wang<sup>1</sup>,
+              </span>
+              <span class="author-block">
+                Ziang Li<sup>1</sup>,
+              </span>
+              <span class="author-block">
+                Zhizhong Su<sup>2</sup>,
+              </span>
+              <span class="author-block">
+                Gaoang Wang<sup>1</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Zhejiang University</span><br>
+              <span class="author-block"><sup>2</sup>Horizon Robotics</span><br>            
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2512.18386" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2512.18386" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span> -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://whhu7.github.io/RecurGS" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="far fa-images"></i>
+                    </span>
+                    <span>Data</span>
+                  </a>
+                </span> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- Data Augmentation -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-11">
+          <h2 class="title is-3">Trajectory Data Augmentation</h2>
+
+          <!-- Scene Switcher Buttons -->
+          <div style="margin-bottom: 1.5rem;">
+            <button id="btn-scene-0" onclick="switchScene(0)" style="background: #667eea; color: white; border: none; padding: 8px 24px; margin: 0 5px; border-radius: 20px; cursor: pointer; font-weight: 600;">Scene 0</button>
+            <button id="btn-scene-1" onclick="switchScene(1)" style="background: #f0f0f0; color: #333; border: none; padding: 8px 24px; margin: 0 5px; border-radius: 20px; cursor: pointer; font-weight: 600;">Scene 1</button>
+          </div>
+
+          <!-- Ground Truth Video -->
+          <div class="columns is-centered">
+            <div class="column is-8">
+              <h4 class="title is-5" style="margin-bottom: 1rem;">Original Demonstration (GT)</h4>
+              <video id="gt-video" autoplay muted loop playsinline width="100%" style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <source src="static/videos/0/gt.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <!-- Augmented Trajectory Slider -->
+          <div class="columns is-centered" style="margin-top: 1.5rem;">
+            <div class="column is-10">
+              <h4 class="title is-5" style="margin-bottom: 1rem;">Augmented Trajectories</h4>
+
+              <!-- Slider Container -->
+              <div style="position: relative;">
+                <!-- Left Arrow -->
+                <button onclick="scrollSlider(-1)" style="position: absolute; left: -45px; top: 50%; transform: translateY(-50%); background: #667eea; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 14px;">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- Scrollable Video Row -->
+                <div id="traj-slider" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding: 10px 0; scrollbar-width: none; -ms-overflow-style: none;">
+                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 1</p>
+                    <video class="aug-video" data-idx="0" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 2</p>
+                    <video class="aug-video" data-idx="1" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 3</p>
+                    <video class="aug-video" data-idx="2" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 4</p>
+                    <video class="aug-video" data-idx="3" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 5</p>
+                    <video class="aug-video" data-idx="4" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 6</p>
+                    <video class="aug-video" data-idx="5" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 7</p>
+                    <video class="aug-video" data-idx="6" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 8</p>
+                    <video class="aug-video" data-idx="7" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 9</p>
+                    <video class="aug-video" data-idx="8" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+
+                <!-- Right Arrow -->
+                <button onclick="scrollSlider(1)" style="position: absolute; right: -45px; top: 50%; transform: translateY(-50%); background: #667eea; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 14px;">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    #traj-slider::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+
+  <script>
+    let currentScene = 0;
+
+    function switchScene(sceneNum) {
+      currentScene = sceneNum;
+
+      // Update button styles
+      document.getElementById('btn-scene-0').style.background = sceneNum === 0 ? '#667eea' : '#f0f0f0';
+      document.getElementById('btn-scene-0').style.color = sceneNum === 0 ? 'white' : '#333';
+      document.getElementById('btn-scene-1').style.background = sceneNum === 1 ? '#667eea' : '#f0f0f0';
+      document.getElementById('btn-scene-1').style.color = sceneNum === 1 ? 'white' : '#333';
+
+      // Update GT video
+      const gtVideo = document.getElementById('gt-video');
+      gtVideo.querySelector('source').src = 'static/videos/' + sceneNum + '/gt.mp4';
+      gtVideo.load();
+      gtVideo.play();
+
+      // Update augmented videos
+      const augVideos = document.querySelectorAll('.aug-video');
+      augVideos.forEach((video, idx) => {
+        video.querySelector('source').src = 'static/videos/' + sceneNum + '/aug0.mp4';
+        video.load();
+        video.play();
+      });
+    }
+
+    function scrollSlider(direction) {
+      const slider = document.getElementById('traj-slider');
+      const scrollAmount = slider.clientWidth * 0.8;
+      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+  </script>
+
+  <!-- Teaser Figure -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-11">
+          <h2 class="title is-3">Overview</h2>
+          <figure class="image">
+            <img src="static/images/teaser.png" alt="Teaser Figure" style="width: 100%;">
+          </figure>
+          <div class="content has-text-justified" style="margin-top: 1rem;">
+            <p class="is-size-6">
+              <strong>High-Fidelity Real2Sim Alignment and Trajectory Augmentation.</strong> 
+              <strong>(Left)</strong> Our framework decomposes monocular ego-view video into aligned assets (URDF robot, objects, and background). 
+              <strong>(Right)</strong> This enables a trajectory augmentation pipeline that synthesizes diverse variations from single demonstrations to scale up data for policy learning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-11">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Reconstructing dynamic and interactive 3D scenes from real-world observations remains a fundamental challenge in computer vision and robotics.
+              While recent advances in 3D Gaussian Splatting have enabled high-fidelity static reconstruction, extending it to interactive environments with articulated robots and manipulable objects remains difficult due to complex contact interactions and abrupt pose changes.
+              To address these challenges, we introduce <span style="background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">ManiSplat</span>, a unified framework that reconstructs controllable and decoupled Gaussian digital twins directly from monocular ego-view robotic videos.
+              Our method introduces a Graph-Structured Disentangled Representation that separates the robot, objects, and background into independently optimizable Gaussian subfields organized within a scene graph.
+              To ensure stability, we propose a Task-Oriented Spatio-Temporal Alignment module that leverages the inherent logic of manipulation tasks—alternating between Motion and Skill phases—to construct accurate pseudo-ground-truth trajectories.
+              Finally, a joint photometric-geometric optimization ensures the reconstructed scenes are temporally coherent, physically consistent, and simulation-ready.
+              Extensive experiments demonstrate that our approach reconstructs interaction-driven dynamic scenes with high fidelity and controllability, effectively supporting downstream robotic tasks and policy learning.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+    </div>
+  </section>
+
+  <!-- Method -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-11">
+          <h2 class="title is-3">Method</h2>
+          <figure class="image">
+            <img src="static/images/method.png" alt="Method Overview" style="width: 100%;">
+          </figure>
+          <div class="content has-text-justified" style="margin-top: 1rem;">
+            <p class="is-size-6">
+              <strong>Overview of the Proposed Framework.</strong>
+              <strong>(Left)</strong> We construct a <em>Gaussian Scene Graph</em> ($\mathcal{G}$) to disentangle the scene into independent semantic nodes: the robot $\mathcal{G}_{robot}$, the object $\mathcal{G}_{obj}$, and the static background $\mathcal{G}_{bg}$. Simultaneously, the manipulation task is segmented into a robot-centric <em>Motion</em> phase (orange, e.g., transport) and an object-centric <em>Skill</em> phase (blue, e.g., insertion).
+              <strong>(Middle)</strong> To build a high-fidelity digital twin, we perform joint optimization via <em>Pose Alignment</em> (tracking kinematic and visual trajectories) and <em>Appearance Alignment</em> (minimizing the photometric loss between the rendered Gaussian splats and real-world observations).
+              <strong>(Right)</strong> Leveraging the decoupled structure, we perform <em>Trajectory Synthesis</em> by generating diverse augmented approach paths (dashed orange lines) that seamlessly converge into the preserved skill execution, significantly scaling up the demonstration data.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-11">
+          <h2 class="title is-3">Results</h2>
+          <figure class="image">
+            <img src="static/images/result.png" alt="Results" style="width: 100%;">
+          </figure>
+          <div class="content has-text-justified" style="margin-top: 1rem;">
+            <p class="is-size-6">
+              <strong>Figure 3.</strong> Qualitative comparison of dynamic reconstruction. 4DGS and DeformableGS exhibit artifacts and blurring during rapid manipulator movements due to the lack of decoupling. HUGS produces blurry object details by over-smoothing the abrupt pose changes during grasping. In contrast, our method maintains sharp boundaries and stable appearance by explicitly modeling the interaction stages.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="columns is-centered">
+      <div class="column is-11">
+        
+      
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@misc{hu2025recurgsinteractivescenemodeling,
+        title={RecurGS: Interactive Scene Modeling via Discrete-State Recurrent Gaussian Fusion}, 
+        author={Wenhao Hu and Haonan Zhou and Zesheng Li and Liu Liu and Jiacheng Dong and Zhizhong Su and Gaoang Wang},
+        year={2025},
+        eprint={2512.18386},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV},
+        url={https://arxiv.org/abs/2512.18386}, 
+  }</code></pre>
+    </div></div>
+    </div>
+  </section> 
+
+
+  <footer class="footer">
+    <div class="container">
+      <!-- 
+      <div class="content has-text-centered">
+        <a class="icon-link" href="./static/videos/nerfies_paper.pdf">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div> -->
+
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              We thank the authors of  <a href="https://github.com/nerfies/nerfies.github.io">Nerfies </a> for kindly open-sourcing the template of this website.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+
+</html>
+
+
