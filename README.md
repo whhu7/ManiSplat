@@ -1,1 +1,1 @@
-# RecurGS
+# ManiSplat
