@@ -42,13 +42,20 @@
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/compare.css">
   <link rel="icon" href="./static/images/logo.png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.3/dist/js/bulma-slider.min.js"></script>
+  <!-- <script src="./static/js/index.js"></script> -->
+  <!-- <script src="./static/js/compare.js"></script> -->
 </head>
 
 <body>
@@ -127,7 +134,7 @@
                 </span> -->
                 <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="https://whhu7.github.io/ManiSplat/" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://whhu7.github.io/RecurGS" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -165,87 +172,76 @@
 
           <!-- Scene Switcher Buttons -->
           <div style="margin-bottom: 1.5rem;">
-            <button id="btn-scene-0" onclick="switchScene(0)" style="background: #667eea; color: white; border: none; padding: 8px 24px; margin: 0 5px; border-radius: 20px; cursor: pointer; font-weight: 600;">Scene 0</button>
-            <button id="btn-scene-1" onclick="switchScene(1)" style="background: #f0f0f0; color: #333; border: none; padding: 8px 24px; margin: 0 5px; border-radius: 20px; cursor: pointer; font-weight: 600;">Scene 1</button>
+            <button id="btn-scene-0" onclick="switchScene(0)" class="scene-btn" style="background: #667eea; color: white; border: none; padding: 8px 24px; margin: 0 5px; border-radius: 20px; cursor: pointer; font-weight: 600;">Scene 0</button>
+            <button id="btn-scene-1" onclick="switchScene(1)" class="scene-btn" style="background: #f0f0f0; color: #333; border: none; padding: 8px 24px; margin: 0 5px; border-radius: 20px; cursor: pointer; font-weight: 600;">Scene 1</button>
+            <button id="btn-scene-2" onclick="switchScene(2)" class="scene-btn" style="background: #f0f0f0; color: #333; border: none; padding: 8px 24px; margin: 0 5px; border-radius: 20px; cursor: pointer; font-weight: 600;">Scene 2</button>
           </div>
 
           <!-- Ground Truth Video -->
-          <div class="columns is-centered">
-            <div class="column is-8">
-              <h4 class="title is-5" style="margin-bottom: 1rem;">Original Demonstration (GT)</h4>
+          <div class="columns is-centered" style="margin-bottom: 1.5rem;">
+            <div class="column is-8" style="padding-bottom: 0;">
+              <h4 class="title is-5" style="margin-bottom: 1rem;">Original Demonstration</h4>
               <video id="gt-video" autoplay muted loop playsinline width="100%" style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <source src="static/videos/0/gt.mp4" type="video/mp4">
+                <source src="static/videos/0/original_demonstration.mp4" type="video/mp4">
               </video>
             </div>
           </div>
 
           <!-- Augmented Trajectory Slider -->
-          <div class="columns is-centered" style="margin-top: 1.5rem;">
-            <div class="column is-10">
-              <h4 class="title is-5" style="margin-bottom: 1rem;">Augmented Trajectories</h4>
+          <div class="columns is-centered">
+            <div class="column is-10" style="padding-top: 0;">
+              <h4 class="title is-5 traj-section-title">Augmented Trajectories</h4>
 
               <!-- Slider Container -->
-              <div style="position: relative;">
+              <div class="traj-slider-wrap" style="position: relative;">
                 <!-- Left Arrow -->
                 <button onclick="scrollSlider(-1)" style="position: absolute; left: -45px; top: 50%; transform: translateY(-50%); background: #667eea; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 14px;">
                   <i class="fas fa-chevron-left"></i>
                 </button>
 
                 <!-- Scrollable Video Row -->
-                <div id="traj-slider" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding: 10px 0; scrollbar-width: none; -ms-overflow-style: none;">
-                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 1</p>
+                <div id="traj-slider" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">
+                  <div class="traj-item" data-slot="0" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
                     <video class="aug-video" data-idx="0" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                      <source src="static/videos/0/trajectory_01.mp4" type="video/mp4">
                     </video>
+                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
                   </div>
-                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 2</p>
+                  <div class="traj-item" data-slot="1" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
                     <video class="aug-video" data-idx="1" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                      <source src="static/videos/0/trajectory_02.mp4" type="video/mp4">
                     </video>
+                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
                   </div>
-                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 3</p>
+                  <div class="traj-item" data-slot="2" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
                     <video class="aug-video" data-idx="2" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                      <source src="static/videos/0/trajectory_03.mp4" type="video/mp4">
                     </video>
+                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
                   </div>
-                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 4</p>
+                  <div class="traj-item" data-slot="3" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
                     <video class="aug-video" data-idx="3" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                      <source src="static/videos/0/trajectory_04.mp4" type="video/mp4">
                     </video>
+                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
                   </div>
-                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 5</p>
+                  <div class="traj-item" data-slot="4" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
                     <video class="aug-video" data-idx="4" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                      <source src="static/videos/0/trajectory_05.mp4" type="video/mp4">
                     </video>
+                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
                   </div>
-                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 6</p>
+                  <div class="traj-item" data-slot="5" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
                     <video class="aug-video" data-idx="5" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                      <source src="static/videos/0/trajectory_06.mp4" type="video/mp4">
                     </video>
+                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
                   </div>
-                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 7</p>
+                  <div class="traj-item" data-slot="6" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
                     <video class="aug-video" data-idx="6" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
+                      <source src="static/videos/0/trajectory_07.mp4" type="video/mp4">
                     </video>
-                  </div>
-                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 8</p>
-                    <video class="aug-video" data-idx="7" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
-                    </video>
-                  </div>
-                  <div class="traj-item" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <p style="font-size: 0.85rem; font-weight: 600; color: #667eea; margin-bottom: 0.5rem;">Trajectory 9</p>
-                    <video class="aug-video" data-idx="8" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/aug0.mp4" type="video/mp4">
-                    </video>
+                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
                   </div>
                 </div>
 
@@ -265,33 +261,167 @@
     #traj-slider::-webkit-scrollbar {
       display: none;
     }
+
+    .traj-section-title {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .traj-slider-wrap {
+      margin: 0;
+      padding: 0;
+    }
+
+    #traj-slider {
+      padding: 0;
+      margin: 0;
+    }
+
+    .traj-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .traj-item .aug-video {
+      display: block;
+      vertical-align: top;
+    }
+
+    .traj-caption {
+      height: 2.5rem;
+      margin: 0.35rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.1rem;
+      line-height: 1.15;
+      overflow: hidden;
+    }
+
+    .traj-caption__title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #667eea;
+    }
+
+    .traj-caption__title.is-featured {
+      color: #5a3d9e;
+    }
+
+    .traj-caption__pose {
+      font-size: 0.65rem;
+      font-weight: 500;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: #6b7280;
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+    }
+
+    .traj-caption__pose .pose-dim {
+      display: inline;
+      margin: 0 0.08rem;
+    }
+
+    .traj-caption__pose .pose-dim:first-child {
+      margin-left: 0;
+    }
+
+    .traj-caption__pose .pose-dim:last-child {
+      margin-right: 0;
+    }
   </style>
 
   <script>
     let currentScene = 0;
+    const TRAJ_COUNT = 7;
+    // Inlined so captions & scene switch work without a local HTTP server (file://).
+    const sceneTrajectoryMeta = {
+      "0": [
+        {x:0.1,y:0,yaw:-40},{x:-0.02,y:-0.15,yaw:-37},{x:-0.15,y:0.15,yaw:28},
+        {x:-0.02,y:0.15,yaw:21},{x:-0.15,y:0,yaw:-18},{x:-0.02,y:0,yaw:9},{x:-0.15,y:-0.15,yaw:-21}
+      ],
+      "1": [
+        {x:-0.15,y:0,yaw:41},{x:-0.02,y:-0.15,yaw:40},{x:-0.15,y:0.15,yaw:-32},
+        {x:-0.15,y:-0.15,yaw:1},{x:-0.02,y:0,yaw:-17},{x:0.1,y:0,yaw:-8},{x:-0.02,y:0.15,yaw:-7}
+      ],
+      "2": [
+        {x:-0.07,y:-0.15,yaw:-44},{x:-0.15,y:0.15,yaw:-41},{x:-0.07,y:0.15,yaw:37},
+        {x:-0.15,y:-0.15,yaw:12},{x:-0.07,y:0,yaw:28},{x:-0.15,y:0,yaw:-21},{x:0,y:0,yaw:21}
+      ]
+    };
+
+    function signedNum(v, decimals) {
+      const sign = v < 0 ? '−' : '+';
+      const body = decimals === 0
+        ? String(Math.round(Math.abs(v)))
+        : Math.abs(v).toFixed(decimals);
+      return sign + body;
+    }
+
+    function formatPoseHTML(x, y, yaw) {
+      return (
+        '<span class="pose-dim">x' + signedNum(x, 2) + '</span>' +
+        '<span class="pose-dim">y' + signedNum(y, 2) + '</span>' +
+        '<span class="pose-dim">ψ' + signedNum(yaw, 0) + '°</span>'
+      );
+    }
+
+    function updateTrajCaption(item, slot, pose) {
+      const title = item.querySelector('.traj-caption__title');
+      const poseEl = item.querySelector('.traj-caption__pose');
+      const featured = slot < 3;
+      title.textContent = 'Augment ' + String(slot + 1).padStart(2, '0');
+      title.classList.toggle('is-featured', featured);
+      poseEl.innerHTML = formatPoseHTML(pose.x, pose.y, pose.yaw);
+    }
+
+    function gtVideoSrc(sceneNum) {
+      return 'static/videos/' + sceneNum + '/original_demonstration.mp4';
+    }
+
+    function trajectoryVideoSrc(sceneNum, slot) {
+      const n = String(slot + 1).padStart(2, '0');
+      return 'static/videos/' + sceneNum + '/trajectory_' + n + '.mp4';
+    }
 
     function switchScene(sceneNum) {
       currentScene = sceneNum;
+      const meta = sceneTrajectoryMeta[String(sceneNum)];
+      if (!meta) return;
 
-      // Update button styles
-      document.getElementById('btn-scene-0').style.background = sceneNum === 0 ? '#667eea' : '#f0f0f0';
-      document.getElementById('btn-scene-0').style.color = sceneNum === 0 ? 'white' : '#333';
-      document.getElementById('btn-scene-1').style.background = sceneNum === 1 ? '#667eea' : '#f0f0f0';
-      document.getElementById('btn-scene-1').style.color = sceneNum === 1 ? 'white' : '#333';
+      [0, 1, 2].forEach((i) => {
+        const btn = document.getElementById('btn-scene-' + i);
+        const active = i === sceneNum;
+        btn.style.background = active ? '#667eea' : '#f0f0f0';
+        btn.style.color = active ? 'white' : '#333';
+      });
 
-      // Update GT video
       const gtVideo = document.getElementById('gt-video');
-      gtVideo.querySelector('source').src = 'static/videos/' + sceneNum + '/gt.mp4';
+      gtVideo.querySelector('source').src = gtVideoSrc(sceneNum);
       gtVideo.load();
       gtVideo.play();
 
-      // Update augmented videos
-      const augVideos = document.querySelectorAll('.aug-video');
-      augVideos.forEach((video, idx) => {
-        video.querySelector('source').src = 'static/videos/' + sceneNum + '/aug0.mp4';
+      document.querySelectorAll('.traj-item').forEach((item) => {
+        const slot = parseInt(item.dataset.slot, 10);
+        if (slot >= TRAJ_COUNT) {
+          item.style.display = 'none';
+          return;
+        }
+        item.style.display = '';
+        const pose = meta[slot];
+        updateTrajCaption(item, slot, pose);
+
+        const video = item.querySelector('.aug-video');
+        video.querySelector('source').src = trajectoryVideoSrc(sceneNum, slot);
         video.load();
         video.play();
       });
+
+      document.getElementById('traj-slider').scrollLeft = 0;
     }
 
     function scrollSlider(direction) {
@@ -299,6 +429,11 @@
       const scrollAmount = slider.clientWidth * 0.8;
       slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
+
+    window.switchScene = switchScene;
+    window.scrollSlider = scrollSlider;
+
+    document.addEventListener('DOMContentLoaded', () => switchScene(0));
   </script>
 
   <!-- Teaser Figure -->
@@ -380,7 +515,7 @@
           </figure>
           <div class="content has-text-justified" style="margin-top: 1rem;">
             <p class="is-size-6">
-              Qualitative comparison of dynamic reconstruction. 4DGS and DeformableGS exhibit artifacts and blurring during rapid manipulator movements due to the lack of decoupling. HUGS produces blurry object details by over-smoothing the abrupt pose changes during grasping. In contrast, our method maintains sharp boundaries and stable appearance by explicitly modeling the interaction stages.
+              <strong>Figure 3.</strong> Qualitative comparison of dynamic reconstruction. 4DGS and DeformableGS exhibit artifacts and blurring during rapid manipulator movements due to the lack of decoupling. HUGS produces blurry object details by over-smoothing the abrupt pose changes during grasping. In contrast, our method maintains sharp boundaries and stable appearance by explicitly modeling the interaction stages.
             </p>
           </div>
         </div>
