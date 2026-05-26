@@ -1,5 +1,6 @@
 # Publishes the repo to gh-pages without downloading actions from codeload.github.com.
 # Pages settings: Build and deployment → Deploy from a branch → gh-pages → / (root)
+# Also enable: Settings → Actions → General → Workflow permissions → Read and write
 
 name: Publish site to gh-pages
 
@@ -21,11 +22,13 @@ jobs:
         run: |
           set -euxo pipefail
           REPO="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git clone --depth=1 "$REPO" wc
+          git clone --depth=1 -b main "$REPO" wc
           cd wc
+          rm -rf .git
+          git init -b gh-pages
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout --orphan gh-pages
           git add -A
           git commit -m "Deploy ${GITHUB_SHA::7} from ${GITHUB_REF_NAME}"
-          git push -f "$REPO" gh-pages
+          git remote add origin "$REPO"
+          git push -f origin gh-pages
