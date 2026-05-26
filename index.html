@@ -177,79 +177,53 @@
             <button id="btn-scene-2" onclick="switchScene(2)" class="scene-btn" style="background: #f0f0f0; color: #333; border: none; padding: 8px 24px; margin: 0 5px; border-radius: 20px; cursor: pointer; font-weight: 600;">Scene 2</button>
           </div>
 
-          <!-- Ground Truth Video -->
-          <div class="columns is-centered" style="margin-bottom: 1.5rem;">
-            <div class="column is-8" style="padding-bottom: 0;">
-              <h4 class="title is-5" style="margin-bottom: 1rem;">Original Demonstration</h4>
-              <video id="gt-video" autoplay muted loop playsinline width="100%" style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <!-- Original (same cell size as grid) + 6 augmented in 2×3 -->
+          <div class="traj-gt-row">
+            <div class="traj-item traj-item--gt">
+              <video id="gt-video" class="traj-video" autoplay muted loop playsinline width="100%">
                 <source src="static/videos/0/original_demonstration.mp4" type="video/mp4">
               </video>
+              <div class="traj-caption traj-caption--single">
+                <div class="traj-caption__title">Original Demonstration</div>
+              </div>
             </div>
           </div>
-
-          <!-- Augmented Trajectory Slider -->
-          <div class="columns is-centered">
-            <div class="column is-10" style="padding-top: 0;">
-              <h4 class="title is-5 traj-section-title">Augmented Trajectories</h4>
-
-              <!-- Slider Container -->
-              <div class="traj-slider-wrap" style="position: relative;">
-                <!-- Left Arrow -->
-                <button onclick="scrollSlider(-1)" style="position: absolute; left: -45px; top: 50%; transform: translateY(-50%); background: #667eea; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 14px;">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-
-                <!-- Scrollable Video Row -->
-                <div id="traj-slider" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">
-                  <div class="traj-item" data-slot="0" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <video class="aug-video" data-idx="0" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/trajectory_01.mp4" type="video/mp4">
-                    </video>
-                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
-                  </div>
-                  <div class="traj-item" data-slot="1" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <video class="aug-video" data-idx="1" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/trajectory_02.mp4" type="video/mp4">
-                    </video>
-                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
-                  </div>
-                  <div class="traj-item" data-slot="2" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <video class="aug-video" data-idx="2" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/trajectory_03.mp4" type="video/mp4">
-                    </video>
-                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
-                  </div>
-                  <div class="traj-item" data-slot="3" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <video class="aug-video" data-idx="3" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/trajectory_04.mp4" type="video/mp4">
-                    </video>
-                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
-                  </div>
-                  <div class="traj-item" data-slot="4" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <video class="aug-video" data-idx="4" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/trajectory_05.mp4" type="video/mp4">
-                    </video>
-                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
-                  </div>
-                  <div class="traj-item" data-slot="5" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <video class="aug-video" data-idx="5" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/trajectory_06.mp4" type="video/mp4">
-                    </video>
-                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
-                  </div>
-                  <div class="traj-item" data-slot="6" style="flex: 0 0 calc(33.333% - 10px); min-width: 200px;">
-                    <video class="aug-video" data-idx="6" autoplay muted loop playsinline width="100%" style="border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                      <source src="static/videos/0/trajectory_07.mp4" type="video/mp4">
-                    </video>
-                    <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
-                  </div>
-                </div>
-
-                <!-- Right Arrow -->
-                <button onclick="scrollSlider(1)" style="position: absolute; right: -45px; top: 50%; transform: translateY(-50%); background: #667eea; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 14px;">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-              </div>
+          <div id="traj-grid" class="traj-matrix">
+            <div class="traj-item" data-display-slot="0">
+              <video class="aug-video traj-video" data-display-slot="0" autoplay muted loop playsinline width="100%">
+                <source src="static/videos/0/trajectory_01.mp4" type="video/mp4">
+              </video>
+              <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
+            </div>
+            <div class="traj-item" data-display-slot="1">
+              <video class="aug-video traj-video" data-display-slot="1" autoplay muted loop playsinline width="100%">
+                <source src="static/videos/0/trajectory_02.mp4" type="video/mp4">
+              </video>
+              <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
+            </div>
+            <div class="traj-item" data-display-slot="2">
+              <video class="aug-video traj-video" data-display-slot="2" autoplay muted loop playsinline width="100%">
+                <source src="static/videos/0/trajectory_03.mp4" type="video/mp4">
+              </video>
+              <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
+            </div>
+            <div class="traj-item" data-display-slot="3">
+              <video class="aug-video traj-video" data-display-slot="3" autoplay muted loop playsinline width="100%">
+                <source src="static/videos/0/trajectory_04.mp4" type="video/mp4">
+              </video>
+              <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
+            </div>
+            <div class="traj-item" data-display-slot="4">
+              <video class="aug-video traj-video" data-display-slot="4" autoplay muted loop playsinline width="100%">
+                <source src="static/videos/0/trajectory_05.mp4" type="video/mp4">
+              </video>
+              <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
+            </div>
+            <div class="traj-item" data-display-slot="5">
+              <video class="aug-video traj-video" data-display-slot="5" autoplay muted loop playsinline width="100%">
+                <source src="static/videos/0/trajectory_06.mp4" type="video/mp4">
+              </video>
+              <div class="traj-caption"><div class="traj-caption__title"></div><div class="traj-caption__pose"></div></div>
             </div>
           </div>
         </div>
@@ -258,32 +232,35 @@
   </section>
 
   <style>
-    #traj-slider::-webkit-scrollbar {
-      display: none;
+    .traj-gt-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
     }
 
-    .traj-section-title {
-      margin-top: 0;
-      margin-bottom: 1.5rem;
+    .traj-gt-row .traj-item--gt {
+      width: calc((100% - 2 * 1rem) / 3);
+      max-width: 100%;
     }
 
-    .traj-slider-wrap {
-      margin: 0;
-      padding: 0;
-    }
-
-    #traj-slider {
-      padding: 0;
+    .traj-matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 1rem;
       margin: 0;
     }
 
     .traj-item {
       display: flex;
       flex-direction: column;
+      min-width: 0;
     }
 
-    .traj-item .aug-video {
+    .traj-video {
       display: block;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       vertical-align: top;
     }
 
@@ -300,16 +277,15 @@
       overflow: hidden;
     }
 
+    .traj-caption--single {
+      height: 1.35rem;
+    }
+
     .traj-caption__title {
       font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: #667eea;
-    }
-
-    .traj-caption__title.is-featured {
-      color: #5a3d9e;
     }
 
     .traj-caption__pose {
@@ -337,20 +313,20 @@
 
   <script>
     let currentScene = 0;
-    const TRAJ_COUNT = 7;
+    const TRAJ_DISPLAY_COUNT = 6;
     // Inlined so captions & scene switch work without a local HTTP server (file://).
     const sceneTrajectoryMeta = {
       "0": [
         {x:0.1,y:0,yaw:-40},{x:-0.02,y:-0.15,yaw:-37},{x:-0.15,y:0.15,yaw:28},
-        {x:-0.02,y:0.15,yaw:21},{x:-0.15,y:0,yaw:-18},{x:-0.02,y:0,yaw:9},{x:-0.15,y:-0.15,yaw:-21}
+        {x:-0.02,y:0.15,yaw:21},{x:-0.15,y:0,yaw:-18},{x:-0.15,y:-0.15,yaw:-21}
       ],
       "1": [
         {x:-0.15,y:0,yaw:41},{x:-0.02,y:-0.15,yaw:40},{x:-0.15,y:0.15,yaw:-32},
-        {x:-0.15,y:-0.15,yaw:1},{x:-0.02,y:0,yaw:-17},{x:0.1,y:0,yaw:-8},{x:-0.02,y:0.15,yaw:-7}
+        {x:-0.02,y:0,yaw:-17},{x:0.1,y:0,yaw:-8},{x:-0.02,y:0.15,yaw:-7}
       ],
       "2": [
         {x:-0.07,y:-0.15,yaw:-44},{x:-0.15,y:0.15,yaw:-41},{x:-0.07,y:0.15,yaw:37},
-        {x:-0.15,y:-0.15,yaw:12},{x:-0.07,y:0,yaw:28},{x:-0.15,y:0,yaw:-21},{x:0,y:0,yaw:21}
+        {x:-0.15,y:-0.15,yaw:12},{x:-0.07,y:0,yaw:28},{x:-0.15,y:0,yaw:-21}
       ]
     };
 
@@ -373,9 +349,7 @@
     function updateTrajCaption(item, slot, pose) {
       const title = item.querySelector('.traj-caption__title');
       const poseEl = item.querySelector('.traj-caption__pose');
-      const featured = slot < 3;
       title.textContent = 'Augment ' + String(slot + 1).padStart(2, '0');
-      title.classList.toggle('is-featured', featured);
       poseEl.innerHTML = formatPoseHTML(pose.x, pose.y, pose.yaw);
     }
 
@@ -383,14 +357,15 @@
       return 'static/videos/' + sceneNum + '/original_demonstration.mp4';
     }
 
-    function trajectoryVideoSrc(sceneNum, slot) {
-      const n = String(slot + 1).padStart(2, '0');
+    function trajectoryVideoSrc(sceneNum, displaySlot) {
+      const n = String(displaySlot + 1).padStart(2, '0');
       return 'static/videos/' + sceneNum + '/trajectory_' + n + '.mp4';
     }
 
     function switchScene(sceneNum) {
       currentScene = sceneNum;
-      const meta = sceneTrajectoryMeta[String(sceneNum)];
+      const key = String(sceneNum);
+      const meta = sceneTrajectoryMeta[key];
       if (!meta) return;
 
       [0, 1, 2].forEach((i) => {
@@ -405,33 +380,24 @@
       gtVideo.load();
       gtVideo.play();
 
-      document.querySelectorAll('.traj-item').forEach((item) => {
-        const slot = parseInt(item.dataset.slot, 10);
-        if (slot >= TRAJ_COUNT) {
+      document.querySelectorAll('#traj-grid .traj-item').forEach((item) => {
+        const displaySlot = parseInt(item.dataset.displaySlot, 10);
+        if (displaySlot >= TRAJ_DISPLAY_COUNT) {
           item.style.display = 'none';
           return;
         }
         item.style.display = '';
-        const pose = meta[slot];
-        updateTrajCaption(item, slot, pose);
+        const pose = meta[displaySlot];
+        updateTrajCaption(item, displaySlot, pose);
 
         const video = item.querySelector('.aug-video');
-        video.querySelector('source').src = trajectoryVideoSrc(sceneNum, slot);
+        video.querySelector('source').src = trajectoryVideoSrc(sceneNum, displaySlot);
         video.load();
         video.play();
       });
-
-      document.getElementById('traj-slider').scrollLeft = 0;
-    }
-
-    function scrollSlider(direction) {
-      const slider = document.getElementById('traj-slider');
-      const scrollAmount = slider.clientWidth * 0.8;
-      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
 
     window.switchScene = switchScene;
-    window.scrollSlider = scrollSlider;
 
     document.addEventListener('DOMContentLoaded', () => switchScene(0));
   </script>
